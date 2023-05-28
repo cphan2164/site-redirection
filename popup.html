@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Website Blocker</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1 {
+        font-size: 18px;
+      }
+      p {
+        margin-top: 5px;
+      }
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+      input[type="text"] {
+        width: 200px;
+      }
+      button {
+        margin-top: 10px;
+      }
+    </style>
+    <script src="popup.js"></script>
+  </head>
+  <body>
+    <h1>Blocked Websites</h1>
+    <p>Add websites to the blocked list:</p>
+    <label for="websiteInput">Website URL:</label>
+    <input type="text" id="websiteInput" placeholder="example.com" />
+    <button id="blockButton">Block</button>
+    <p id="statusMessage"></p>
+  </body>
+</html>
