@@ -3,7 +3,8 @@
   "name": "Site Redirection",
   "version": "1.0",
   "permissions": [
-    "webNavigation"
+    "webNavigation",
+    "storage"
   ],
   "background": {
     "service_worker": "background.js"
