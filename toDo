@@ -1,0 +1,6 @@
+### To-Do List
+
+- [x] Implement basic redirection functionality.
+- [ ] Add option to configure redirection URL.
+- [ ] Improve user interface for the extension popup.
+- [ ] Allow a password to be typed to bypass redirection
