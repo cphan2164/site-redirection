@@ -10,13 +10,38 @@ form.addEventListener("submit", (event) => {
   const siteUrl = siteInput.value.trim();
 
   if (siteUrl) {
-    // Add the site URL to the list
+    // Create a list item
     const listItem = document.createElement("li");
-    listItem.textContent = siteUrl;
+
+    // Create a span element for the site URL
+    const siteUrlSpan = document.createElement("span");
+    siteUrlSpan.textContent = siteUrl;
+
+    // Create a remove button
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+
+    // Append the site URL and remove button to the list item
+    listItem.appendChild(siteUrlSpan);
+    listItem.appendChild(removeButton);
+
+    // Append the list item to the site list
     siteList.appendChild(listItem);
 
     // Clear the input field
     siteInput.value = "";
+
+    // Save the updated site list to storage
+    saveSiteList();
+  }
+});
+
+// Listen for click events on the site list
+siteList.addEventListener("click", (event) => {
+  const target = event.target;
+  if (target.tagName === "BUTTON") {
+    const listItem = target.parentNode;
+    listItem.remove();
 
     // Save the updated site list to storage
     saveSiteList();
@@ -30,8 +55,22 @@ chrome.storage.local.get("siteList", (data) => {
   if (storedSites && Array.isArray(storedSites)) {
     // Populate the site list from storage
     storedSites.forEach((siteUrl) => {
+      // Create a list item
       const listItem = document.createElement("li");
-      listItem.textContent = siteUrl;
+
+      // Create a span element for the site URL
+      const siteUrlSpan = document.createElement("span");
+      siteUrlSpan.textContent = siteUrl;
+
+      // Create a remove button
+      const removeButton = document.createElement("button");
+      removeButton.textContent = "Remove";
+
+      // Append the site URL and remove button to the list item
+      listItem.appendChild(siteUrlSpan);
+      listItem.appendChild(removeButton);
+
+      // Append the list item to the site list
       siteList.appendChild(listItem);
     });
   }
@@ -39,6 +78,9 @@ chrome.storage.local.get("siteList", (data) => {
 
 // Save the site list to storage
 function saveSiteList() {
-  const siteUrls = Array.from(siteList.children).map((listItem) => listItem.textContent);
+  const siteUrls = Array.from(siteList.children).map((listItem) => {
+    const siteUrlSpan = listItem.querySelector("span");
+    return siteUrlSpan.textContent;
+  });
   chrome.storage.local.set({ siteList: siteUrls });
 }
