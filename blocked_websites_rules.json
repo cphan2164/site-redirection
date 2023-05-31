@@ -1,0 +1,18 @@
+[
+    {
+      "id": "block_rule",
+      "priority": 1,
+      "action": {
+        "type": "block"
+      },
+      "condition": {
+        "urlFilter": {
+          "hostSuffix": [
+            "*example.com/*",
+            "*example2.com/*"
+          ]
+        }
+      }
+    }
+  ]
+  

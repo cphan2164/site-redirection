@@ -4,15 +4,13 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
-chrome.webRequest.onBeforeRequest.addListener(
-  function(details) {
-    chrome.storage.sync.get("blockedWebsites", function(data) {
-      const blockedWebsites = data.blockedWebsites;
-      if (blockedWebsites.includes(new URL(details.url).hostname)) {
-        return { cancel: true };
-      }
-    });
-  },
-  { urls: ["<all_urls>"] },
-  ["blocking"]
-);
+chrome.action.onClicked.addListener((tab) => {
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    function: openPopup,
+  });
+});
+
+function openPopup() {
+  chrome.runtime.openOptionsPage();
+}
